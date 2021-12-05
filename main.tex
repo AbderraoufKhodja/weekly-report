@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage[T1]{fontenc}
+\usepackage{dirtytalk}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]
+{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+%\usepackage{apacite}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{indentfirst}
+
+\newcommand{\argminF}{\mathop{\mathrm{argmin}}\limits}
+\newcommand{\minF}{\mathop{\mathrm{min}}\limits}
+\newcommand{\argmaxF}{\mathop{\mathrm{argmax}}\limits}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\eg}    {\emph{e.g.}\xspace}
+\newcommand{\etal}{\textit{et al.}}
+\newtheorem{assumption}{Assumption}
+\newtheorem{assumptionalt}{Assumption}[assumption]
+% New environment
+\newenvironment{assumptionp}[1]{
+  \renewcommand\theassumptionalt{#1}
+  \assumptionalt
+}{\endassumptionalt}
+
+\title{Weekly Report}
+\author{Dr. KHODJA AbdErraouf \\ abderraouf\_khodja@zjnu.edu.cn}
+\date{04 Dec. 2021}
+
+\begin{document}
+\maketitle
+
+
+\input{context.tex}
+
+\pagebreak
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

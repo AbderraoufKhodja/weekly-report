@@ -1,0 +1,35 @@
+\section{Context}
+\label{sec: Context}
+In the context of self supervised images restoration I have recently explored Generative Adversarial Network (GAN) to train image restoration models in an unsupervised fashion. This aligns with the philosophy of image-to-image translation which learns the mapping of from an input image to an output images \cite{isola2017image}. In this context the goal will to learn the mapping from degraded images $Y$ to clean outputs $X$.
+\par In a supervised fashion, the task would be for the generator $D$ to take as input degraded images $Y$ and generate $D(Y)$ a restored (fake) image. Then, a discriminator $D$ take on the role learn the restored (fake) images from the clean ground-truth $X$ as shown in Figure~\ref{fig: sup_GAN}.
+\begin{figure}[h]
+    \label{fig: sup_GAN}
+    \centering
+    \includegraphics[scale=0.23]{./figures/sup_GAN.png}
+    \caption{Supervised approach for image restoration through a GAN framework.}
+\end{figure}
+\par It is also still possible to achieve image restoration without having access the paired corrupted-clean images. The GAN generative models showed impressive performance when it comes learn the distribution of a given set of images. We can train our model learn to differentiate between corrupted and clean images without necessarily having access to data paired Figure~\ref{fig: pairs}. Thus, the discriminator would learn to differentiate corrupted natural images from clean ones. And hopefully signaling the generator to generate restored images and thus achieving self supervised image restorations.
+\begin{figure}[h]
+    \label{fig: pairs}
+    \centering
+    \includegraphics[scale=0.2]{./figures/pairs.png}
+    \caption{Paired and paired images for training.}
+\end{figure}
+\par Therefore, we can reformulate the GAN restoration problem as training a generator to restore clean images by only looking at unpaired corrupted-clean images as depicted in Figure~\ref{fig: unsup_GAN}.
+\begin{figure}[h]
+    \label{fig: unsup_GAN}
+    \centering
+    \includegraphics[scale=0.25]{./figures/unsup_GAN.png}
+    \caption{Unsupervised approach for image restoration through a GAN framework.}
+\end{figure}
+\subsection*{ViT and Robustness}
+\par Vision Transformers (ViT) have gain a lot of attention in the computer vision community since the seminal work of Dosovitskiy \etal \cite{dosovitskiy2020image}. Further works \cite{bai2021transformers} have extensively explored the robustness of ViT on out-of-distribution benchmarks \cite{hendrycks2018benchmarking}. As quoted on their paper
+\say{The dominion of CNNs on visual recognition has been challenged by the recent findings that Transformers appear to be much more robust than CNNs. For example, Shao et al. \cite{shao2021adversarial} observe that the usage of convolutions may introduce a negative effect on model's adversarial robustness, while migrating to Transformer-like architectures (e.g., the Conv-Transformer hybrid model or the pure Transformer) can help secure models’ adversarial robustness. Similarly, Bhojanapalli et al. \cite{bhojanapalli2021understanding} report that, if pre-trained on sufficiently large datasets, Transformers exhibit considerably stronger robustness than CNNs on a spectrum of out-of-distribution tests (e.g., common image corruptions \cite{hendrycks2018benchmarking}, texture-shape cue conflicting stimuli \cite{geirhos2018imagenet}).}.
+\subsection*{Assumption}
+\par \emph{ViT might be a key feature for a self supervised GAN image restoration model. The built-in robustness of ViT to various degradation motivate us to explore its effectiveness combined with a GAN framework.}
+\section{Challenges:}
+\subsection*{Self supervision with GAN}
+\par Training restoration generator $G$ with adversarial cost alone may introduce visual artifacts in certain regions of the generated restored output, but the clean image discriminator $D$ can still end up classifying it as real data rather than generated data, which is harm the restoration performance.
+\par In our experiment we could successfully train a self supervised GAN model to restore noisy unpaired noisy-clean MNIST images. This task becomes much more when using color natural images. Although, the noise is being removed from the generated images, generative artifacts are introduced in the output of the generator. Moreover, the colors between the input and the output the generator are inconsistent. Suggesting that a style transfer has occurred between the unpaired training sets.
+\subsection*{ViT GANs}
+
